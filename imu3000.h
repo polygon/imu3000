@@ -130,5 +130,6 @@ uint8_t WriteReg(uint8_t reg, uint8_t value);
 uint8_t ReadReg(uint8_t reg, uint8_t* buffer);
 uint8_t WriteReg16(uint8_t reg, uint16_t value);
 uint8_t ReadReg16(uint8_t reg, uint16_t* buffer);
+uint8_t ReadReg16Inv(uint8_t reg, uint16_t* buffer);
 
 #endif // __IMU3000_H__

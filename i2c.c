@@ -1,9 +1,11 @@
 #include "i2c.h"
 #include "TWI_Master.h"
 
+uint8_t addr;
+
 uint8_t I2C_Write(uint8_t reg, uint8_t value)
 {
-  if (TWIM_Start(IMU3000_addr, TWIM_WRITE))
+  if (TWIM_Start(addr, TWIM_WRITE))
     if (TWIM_Write(reg))
       if (TWIM_Write(value))
       {
@@ -16,9 +18,9 @@ uint8_t I2C_Write(uint8_t reg, uint8_t value)
 
 uint8_t I2C_Read(uint8_t reg, uint8_t* buffer)
 {
-  if (TWIM_Start(IMU3000_addr, TWIM_WRITE))
+  if (TWIM_Start(addr, TWIM_WRITE))
     if (TWIM_Write(reg))
-      if (TWIM_Start(IMU3000_addr, TWIM_READ))
+      if (TWIM_Start(addr, TWIM_READ))
       {
         *buffer = TWIM_ReadNack();
         TWIM_Stop();
@@ -26,4 +28,9 @@ uint8_t I2C_Read(uint8_t reg, uint8_t* buffer)
       }
   TWIM_Stop();
   return 0;
+}
+
+void I2C_SetAddress(uint8_t address)
+{
+  addr = address;
 }
